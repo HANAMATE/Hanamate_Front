@@ -7,7 +7,7 @@ const HomeTitle = (props) => {
 
   return (
     <Fragment>
-      {props.isAuthenticated ? (
+      {!props.isAuthenticated ? (
         <header className={`${classes.startTitle} ${classes.homeHeader}`} onClick={() => navigate("/login")}>
           <p className={classes.startMessage}>지금 바로</p>
           <p className={classes.startMessage}>하나메이트 시작하기</p>
