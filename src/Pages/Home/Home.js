@@ -1,43 +1,59 @@
 import { Fragment, useState, useEffect } from "react";
 import axios from "axios";
-// import classes from "./Home.module.css";
-import HomeTitle from "../../components/Layout/HomeTitle";
-import HomeButtonBox from "../../components/Button/HomeButtonBox";
-import HomeCardBox from "../../components/Card/HomeCardBox";
+import { useSelector, useDispatch } from "react-redux";
+
+import LocaleString from "../../util/LocaleString";
+import { authActions } from "../../store/auth-slice";
+import HomeTitle from "./components/HomeTitle";
+import HomeButtonBox from "./components/HomeButtonBox";
+import HomeCardBox from "./components/HomeCardBox";
 import Footer from "../../components/Layout/Footer";
-import Header from "../../components/Layout/Header";
+import RootLayout from "../../components/Layout/RootLayout";
+// import Header from "../../components/Layout/Header";
 
 const Home = (props) => {
-  const [auth, setAuth] = useState(false);
-  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated, expiredAt, name, balance, isParent } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("https://hanamate.onrender.com/", { withCredentials: true })
-      // .get("http://localhost:8080/", { withCredentials: true })
-      // .get("http://kzrcgaexjh.us18.qoddiapp.com/", { withCredentials: true })
-      .then((res) => {
-        if (res.data.Status === "Success") {
-          setAuth(true);
-          setName(res.data.name);
-        } else {
-          setMessage(res.data.Message);
-        }
-        setLoading(false);
-      });
+    if (isAuthenticated) return;
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:8080/").then((res) => {
+      // axios.get("https://hanamate.onrender.com/").then((res) => {
+      if (res.data.Status === "Success") {
+        console.log("Success on React Server");
+        console.log(res.data.loginId);
+        dispatch(
+          authActions.login({
+            expiredAt: res.data.expiredAt,
+            name: res.data.name,
+            balance: res.data.balance,
+            isParent: res.data.isParent,
+          })
+        );
+      } else {
+        setMessage(res.data.Message);
+      }
+      setLoading(false);
+    });
   }, []);
 
   return (
-    <Fragment>
-      {/* {auth && <Header title="Home" />} */}
-      {/* <Header left="blank" title="Home" right="blank" /> */}
-      <HomeTitle auth={auth} name={name} message={message} loading={loading} />
+    <RootLayout footer={true}>
+      {/* <Header left="blank" title="홈" right="blank" /> */}
+      <HomeTitle
+        isAuthenticated={isAuthenticated}
+        name={name}
+        message={message}
+        balance={LocaleString(balance)}
+        loading={loading}
+      />
       <HomeButtonBox />
       <HomeCardBox />
       <Footer />
-    </Fragment>
+    </RootLayout>
   );
 };
 

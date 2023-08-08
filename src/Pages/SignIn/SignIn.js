@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+import { authActions } from "../../store/auth-slice";
+import useInput from "../../hooks/use-input";
+import SignLayout from "../../components/Layout/SignLayout";
+import Button1 from "../../components/Button/Button1";
 import Input from "../../components/Input/Input";
 import classes from "./SignIn.module.css";
-import { Link, useNavigate } from "react-router-dom";
-import useInput from "../../hooks/use-input";
-import axios from "axios";
-import SignLayout from "../../components/Layout/SignLayout";
-import SignButton from "../../components/Button/SignButton";
+import RootLayout from "../../components/Layout/RootLayout";
 
 const validateID = (id) => {
   return /^[a-z0-9_-]{5,20}$/.test(id);
@@ -16,94 +20,77 @@ const validatePW = (pw) => {
 
 const SignIn = () => {
   const { value: idValue, isValid: idIsValid, valueChangeHandler: idChangeHandler } = useInput(validateID);
-
   const { value: pwValue, isValid: pwIsValid, valueChangeHandler: pwChangeHandler } = useInput(validatePW);
-
-  const [values, setValues] = useState({
-    id: "",
-    pw: "",
-  });
-  const [shouldSendRequest, setShouldSendRequest] = useState(false);
-  const [formIsValid, setFormIsValid] = useState(true);
-
+  const [values, setValues] = useState({ id: "", pw: "" });
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [allowSendRequest, setAllowSendRequest] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const submitHandler = (event) => {
     event.preventDefault();
     setFormIsValid(idIsValid && pwIsValid);
-    if (!formIsValid) {
+    if (!(idIsValid && pwIsValid)) {
+      setIsError(true);
       return;
     }
-
-    setValues((prevValues) => ({
-      ...prevValues,
-      id: idValue,
-      pw: pwValue,
-    }));
-    setShouldSendRequest(true);
+    setValues((prevValues) => ({ ...prevValues, id: idValue, pw: pwValue }));
+    setAllowSendRequest(true);
   };
 
   useEffect(() => {
-    if (shouldSendRequest && formIsValid) {
+    if (allowSendRequest) {
       axios.defaults.withCredentials = true;
       axios
-        .post("https://hanamate.onrender.com/signin", values)
-        // .post("http://localhost:8080/sign/in", values)
-        // .post("http://kzrcgaexjh.us18.qoddiapp.com/sign/in", values)
+        .post("http://localhost:8080/signin", values)
+        // .post("https://hanamate.onrender.com/signin", values)
         .then((res) => {
           if (res.data.Status === "Success") {
-            // Cookie.set("token_react", res.data.token);
-            // localStorage.setItem("token_react_local_storage", res.data.token);
-            // console.log(values);
-            alert(res.data.Status);
+            console.log("Success on React Server");
+            dispatch(
+              authActions.login({
+                expiredAt: res.data.expiredAt,
+                name: res.data.name,
+                balance: res.data.balance,
+                isParent: res.data.isParent,
+              })
+            );
+            console.log("Success on React Server?");
+
             navigate("/");
           } else {
-            alert(res.data.Message);
+            setAllowSendRequest(false);
+            setIsError(true);
           }
         })
         .catch((err) => console.log(err))
-        .finally(() => setShouldSendRequest(false));
+        .finally(() => setAllowSendRequest(false));
     }
-  }, [values, shouldSendRequest, formIsValid, navigate]);
+  }, [values, allowSendRequest, formIsValid, navigate, dispatch]);
 
   return (
-    <SignLayout>
-      <form className={classes.formContainer} onSubmit={submitHandler}>
-        <h1>HANAMATE</h1>
-        <Input
-          type="text"
-          id="ID"
-          name="ID"
-          label="ID"
-          placeholder="아이디"
-          required={true}
-          onChange={idChangeHandler}
-        />
-        <Input
-          type="password"
-          id="password"
-          name="password"
-          label="password"
-          placeholder="비밀번호"
-          required={true}
-          onChange={pwChangeHandler}
-        />
-        {!formIsValid && (
-          <div className={classes["error-message__container"]}>
-            <p className={classes["error-message"]}>아이디 또는 비밀번호를 다시 입력해주세요.</p>
+    <RootLayout>
+      <SignLayout>
+        <form method="post" className={classes.formContainer} onSubmit={submitHandler}>
+          <h1>HANAMATE</h1>
+          <Input type="text" label="ID" name="ID" placeholder="아이디" onChange={idChangeHandler} />
+          <Input type="password" label="PW" name="PW" placeholder="비밀번호" onChange={pwChangeHandler} />
+          {isError && (
+            <div className={classes["error-message__container"]}>
+              <p className={classes["error-message"]}>아이디 또는 비밀번호를 다시 입력해주세요.</p>
+            </div>
+          )}
+          <Button1 type="submit">로그인</Button1>
+          <div className={classes.helperContainer}>
+            <Link to="/help/idInquiry">아이디 찾기</Link>
+            <Link to="/help/pwInquiry">비밀번호 찾기</Link>
+            <Link to="/join">회원가입</Link>
           </div>
-        )}
-
-        <SignButton type="submit">로그인</SignButton>
-        <div className={classes.helperContainer}>
-          <Link to="/help/idInquiry">아이디 찾기</Link>
-          <Link to="/help/pwInquiry">비밀번호 찾기</Link>
-          <Link to="/join">회원가입</Link>
-        </div>
-      </form>
-    </SignLayout>
+        </form>
+      </SignLayout>
+    </RootLayout>
   );
 };
 
 export default SignIn;
-
-// submitHandler에서 setValues 이후, 업데이트 된 최신 상태로 axios.post 요청을 보내고 싶어

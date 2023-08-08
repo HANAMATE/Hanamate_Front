@@ -5,11 +5,11 @@ import Wallet from "../../assets/wallet-blue.png";
 import Gear from "../../assets/gear-green.png";
 import Phone from "../../assets/phone-red.png";
 import Footer from "../../components/Layout/Footer";
-import { Fragment } from "react";
+import RootLayout from "../../components/Layout/RootLayout";
 
 const Menu = (props) => {
   return (
-    <Fragment>
+    <RootLayout footer={true}>
       <div className={classes.container}>
         <div className={classes.profileContainer}>
           <img className={classes.picture} src={Boy} alt="profile" />
@@ -53,7 +53,7 @@ const Menu = (props) => {
         <div className={classes.appVersion}>앱 버전 정보</div>
       </div>
       <Footer />
-    </Fragment>
+    </RootLayout>
   );
 };
 

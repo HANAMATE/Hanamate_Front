@@ -7,19 +7,36 @@
   align-items: center;
   margin-bottom: 20px;
 }
+.community {
+  padding: 0 15px 0 15px;
+}
 .title {
   font-size: 1.2rem;
   font-weight: 700;
 }
 .seeMore {
+  width: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   border: none;
-  color: var(--main-color-dark);
   background-color: transparent;
-  gap: 5px;
   opacity: 0.75;
+}
+.violet {
+  color: var(--violet2);
+}
+.blue {
+  color: var(--blue4);
+}
+.yellow {
+  color: var(--yellow2);
+}
+.red {
+  color: var(--red2);
+}
+.default {
+  color: var(--main-color-dark);
 }
 .seeMoreText {
   display: flex;

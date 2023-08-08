@@ -5,7 +5,7 @@ import { HiPlusCircle } from "react-icons/hi";
 const AllowanceAskCard = (props) => {
   const navigate = useNavigate();
   const clickHandler = () => {
-    navigate("/allowance/ask");
+    navigate("/allowance/request");
   };
 
   return (

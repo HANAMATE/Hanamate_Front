@@ -1,25 +1,29 @@
 import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import SignIn from "./Pages/SignIn/SignIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import Home from "./Pages/Home/Home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Notification from "./Pages/Notification/Notification";
 import Menu from "./Pages/Menu/Menu";
 import RootLayout from "./components/Layout/RootLayout";
 import Calendar from "./Pages/Calendar/Calendar";
-import InputMoney from "./components/InputMoney/InputMoney";
-import AllowanceAskMember from "./Pages/Allowance/AllowanceAskMember";
-import AskSend from "./Pages/AskSend/AskSend";
-import AllowanceHistory from "./Pages/Allowance/AllowanceHistory";
+import SetAmount from "./components/SetAmount/SetAmount";
+import Request from "./Pages/Allowance/Request/Request";
+import RequestConfirm from "./Pages/Allowance/RequestConfirm/RequestConfirm";
+import History from "./Pages/Allowance/History/History";
 import Allowance from "./Pages/Allowance/Allowance";
-import AllowanceFill from "./Pages/Allowance/AllowanceFill";
-import AllowanceAskSetAmount from "./Pages/Allowance/AllowanceAskSetAmount";
-import { action as FillAction } from "./components/InputMoney/InputMoney";
+import Fill from "./Pages/Allowance/Fill/Fill";
+import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
+import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
+import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
+import ArticleDetail from "./Pages/Community/ArticleDetail";
+// import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    // errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },
       { path: "login", element: <SignIn /> },
@@ -27,25 +31,28 @@ const router = createBrowserRouter([
       { path: "notification", element: <Notification /> },
       { path: "calendar", element: <Calendar /> },
       { path: "menu", element: <Menu /> },
-      { path: "input", element: <InputMoney /> },
+      { path: "input", element: <SetAmount /> },
       {
         path: "allowance",
         children: [
           { index: true, element: <Allowance /> },
           {
-            path: "ask",
+            path: "request",
             children: [
-              { index: true, element: <AllowanceAskMember /> },
-              { path: "set", element: <AllowanceAskSetAmount /> },
+              { index: true, element: <Request /> },
+              { path: "set", element: <RequestSet /> },
+              { path: "confirm", element: <RequestConfirm /> },
+              { path: "end", element: <RequestEnd /> },
             ],
           },
-          { path: "send", element: <AskSend /> },
-          { path: "check", element: <AllowanceHistory /> },
-          { path: "fill", element: <AllowanceFill />, action: FillAction },
+          { path: "history", element: <History /> },
+          { path: "fill", element: <Fill /> },
         ],
       },
     ],
   },
+  { path: "community", element: <CommunityAccount /> },
+  { path: "article", element: <ArticleDetail /> },
 ]);
 
 const App = () => {

@@ -86,6 +86,7 @@ section,
 summary,
 time,
 mark,
+button,
 audio,
 video {
   box-sizing: border-box;
@@ -132,7 +133,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+a {
+  text-decoration: none;
+}
 body {
   font-family: "Toss Product Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -162,4 +165,25 @@ code {
   --home-color-sky: #22a2c9;
   --home-color-orange: #f88a24;
   --home-color-red: #fc2a6a;
+
+  --red1: #ed6a9e;
+  --red2: #f25871;
+  --yellow1: #eea05b;
+  --yellow2: #e1995a;
+  --yellow3: #fd9524;
+  --yellow4: #fec363;
+  --brown1: #d99459;
+  --brown2: #c0633a;
+  --green1: #67c8c1;
+  --green2: #9ed5c0;
+  --green3: #31d1a0;
+  --blue1: #95b0e5;
+  --blue2: #6a78b5;
+  --blue3: #5067e7;
+  --blue4: #657cff;
+  --violet1: #c39ff7;
+  --violet2: #9b65ff;
+  --violet3: #9681eb;
+  --gray1: #8a9bad;
+  --black1: #373a4d;
 }

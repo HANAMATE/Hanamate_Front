@@ -64,8 +64,16 @@
   border-bottom: 1px solid #ccc;
   border-radius: 0px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .typeSelector .selected {
   border-bottom: 2px solid #9681eb;
+}
+
+.errorMessage {
+  font-size: 0.9rem;
+  color: red;
+  opacity: 0.9;
+  margin-bottom: 20px;
 }
