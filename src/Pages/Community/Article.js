@@ -16,7 +16,7 @@ const Article = (props) => {
             <p className={classes.title}>곤트란쉐리에 성수점</p>
             <div>
               <p className={classes.subTitle}>2023년 8월 7일 월요일 오후 2시 31분</p>{" "}
-              <p className={classes.red2}>-32,000원</p>
+              <p className={classes.blue2}>-32,000원</p>
             </div>
           </div>
         </div>

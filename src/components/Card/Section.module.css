@@ -36,7 +36,7 @@
   color: var(--red2);
 }
 .default {
-  color: var(--main-color-dark);
+  color: var(--blue2);
 }
 .seeMoreText {
   display: flex;

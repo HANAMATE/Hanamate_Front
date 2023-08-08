@@ -21,6 +21,7 @@ import Article from "../Article";
 import CommunityHeader from "../../../components/Layout/CommunityHeader";
 import Section from "../../../components/Card/Section";
 import Wallet from "../../../components/Card/Wallet";
+import Account from "../Account";
 
 const DUMMY_ARTICLE = [
   // DUMMY00,
@@ -41,12 +42,13 @@ const DUMMY_ARTICLE = [
 const CommunityAccount = (props) => {
   return (
     <CommunityLayout>
-      <Header left="back" title="시그니엘" right="blank" />
+      <Header left="back" title="여름방학 속초 🏖️" right="blank" />
       <div className={classes.container}>
-        <div className={classes.walletBox}>
+        {/* <div className={classes.walletBox}>
           <Wallet color="blue" />
-        </div>
-        <Section community={true} title="모임일기" seeMore={true} seeMoreText="거래내역 전체보기" seeMoreColor="red">
+        </div> */}
+        <Account />
+        <Section community={true} title="모임일기" seeMore={true} seeMoreText="거래내역 전체보기">
           {DUMMY_ARTICLE.map((each) => {
             return <Article key={each} image={each} />;
           })}
