@@ -1,11 +1,8 @@
 .startTitle {
   width: fit-content;
   height: fit-content;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  /* color: #121212; */
   color: #606060;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.25;
 }
