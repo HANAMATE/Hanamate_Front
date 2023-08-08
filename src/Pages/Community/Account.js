@@ -42,11 +42,11 @@ const Account = (props) => {
           </div>
         </div>
       </div>
-      <div className={classes.faceBox}>
+      {/* <div className={classes.faceBox}>
         {DUMMY.map((each) => (
           <img key={each.id} src={each.profile} alt="profile" />
         ))}
-      </div>
+      </div> */}
     </Fragment>
   );
 };

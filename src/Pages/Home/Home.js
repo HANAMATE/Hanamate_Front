@@ -41,7 +41,7 @@ const Home = (props) => {
   }, []);
 
   return (
-    <RootLayout footer={true}>
+    <RootLayout footer={true} header={true}>
       {/* <Header left="blank" title="홈" right="blank" /> */}
       <HomeTitle
         isAuthenticated={isAuthenticated}

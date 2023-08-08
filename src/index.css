@@ -142,7 +142,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   /* background-color: #f9f9f9; */
-  background-color: #ccc;
+  /* background-color: #ddd; */
+  background-color: #f9deff;
 }
 
 html {
