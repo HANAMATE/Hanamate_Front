@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Header = (props) => {
   const navigate = useNavigate();
   const backClickHandler = () => {
-    navigate("..");
+    navigate(-1);
   };
 
   return (

@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
 import { RiInformationFill } from "react-icons/ri";
 import { FaWallet, FaPercentage, FaCoins, FaMoneyCheck } from "react-icons/fa";
 import classes from "./Wallet.module.css";
@@ -13,7 +11,7 @@ const Wallet = (props) => {
   const fillClickHandler = () => {
     navigate("fill");
   };
-  const { balance } = useSelector((state) => state.auth);
+
   let walletColor = "";
   switch (props.color) {
     case "violet":
@@ -40,7 +38,7 @@ const Wallet = (props) => {
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
           <p className={classes.subTitle}>남은 용돈</p>
-          <p className={classes.title}>{Number(balance).toLocaleString()}원</p>
+          <p className={classes.title}>{Number(props.balance).toLocaleString()}원</p>
         </div>
         <div className={classes.iconBox}>
           <RiInformationFill fill="#f9f9f9" />
