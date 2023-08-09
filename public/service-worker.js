@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 const CACHE_NAME = "cool-cache";
 const PRECACHE_ASSETS = ["/assets/", "/src/"];
 
