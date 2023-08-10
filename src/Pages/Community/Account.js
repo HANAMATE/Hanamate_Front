@@ -10,17 +10,15 @@ import Profile03 from "../../assets/profile03.png";
 import Profile04 from "../../assets/profile04.png";
 import Profile05 from "../../assets/profile05.png";
 import Profile06 from "../../assets/profile06.png";
-import Profile07 from "../../assets/profile07.png";
 import { Fragment } from "react";
 
-const DUMMY = [
+const DUMMY_MEMBER = [
   { id: 1, profile: Profile01 },
   { id: 2, profile: Profile02 },
   { id: 3, profile: Profile03 },
   { id: 4, profile: Profile04 },
   { id: 5, profile: Profile05 },
   { id: 6, profile: Profile06 },
-  { id: 7, profile: Profile07 },
 ];
 
 const Account = (props) => {
@@ -43,7 +41,7 @@ const Account = (props) => {
         </div>
       </div>
       <div className={classes.faceBox}>
-        {DUMMY.map((each) => (
+        {DUMMY_MEMBER.map((each) => (
           <img key={each.id} src={each.profile} alt="profile" />
         ))}
       </div>
