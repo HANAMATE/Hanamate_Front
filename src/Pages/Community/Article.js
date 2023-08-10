@@ -5,6 +5,7 @@ import { IoPaperPlaneOutline } from "react-icons/io5";
 import { MdBookmarkBorder } from "react-icons/md";
 
 import classes from "./Article.module.css";
+import CommentBox from "../../components/CommentBox";
 
 const Article = (props) => {
   return (
@@ -46,6 +47,7 @@ const Article = (props) => {
           <p className={classes.content}>김미미 악세사리 다 내꺼내꺼</p>
         </div>
       </div>
+      <CommentBox />
     </div>
   );
 };

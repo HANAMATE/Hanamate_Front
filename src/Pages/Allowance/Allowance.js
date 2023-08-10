@@ -69,6 +69,7 @@ const Allowance = (props) => {
         <TransactionBox>
           {DUMMY.map((each) => (
             <Transaction
+              key={each.title}
               date={each.date}
               title={each.title}
               subTitle={each.subTitle}

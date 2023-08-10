@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   border-top: 1px solid #bdbdbd;
+  padding: 10px 0 20px 0;
 }
 .titleBox {
   width: 100%;

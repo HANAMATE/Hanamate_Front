@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -8,30 +8,10 @@
     <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>React App</title>
+    <title>Hanamate</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script>
-      const registerServiceWorker = async () => {
-        if ("serviceWorker" in navigator) {
-          try {
-            const registration = await navigator.serviceWorker.register("./service-worker.js");
-            if (registration.installing) {
-              console.log("Service worker installing");
-            } else if (registration.waiting) {
-              console.log("Service worker installed");
-            } else if (registration.active) {
-              console.log("Service worker active");
-            }
-          } catch (error) {
-            console.error(`Registration failed with ${error}`);
-          }
-        }
-      };
-
-      registerServiceWorker();
-    </script>
   </body>
 </html>

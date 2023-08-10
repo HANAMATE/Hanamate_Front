@@ -27,21 +27,6 @@
   "dir": "ltr",
   "lang": "ko",
   "orientation": "portrait",
-  "scope": "https://hanamate.vercel.app/",
   "display_override": ["standalone", "window-controls-overlay"],
-  "categories": ["finance", "kids"],
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.kebhana.hanapush&amp;hl=ko&amp;gl=US",
-      "id": "com.kebhana.hanapush"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "home",
-      "url": "https://hanamate.vercel.app/",
-      "description": "home"
-    }
-  ]
+  "categories": ["finance", "kids"]
 }
